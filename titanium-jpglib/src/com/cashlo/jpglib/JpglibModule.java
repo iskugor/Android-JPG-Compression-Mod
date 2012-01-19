@@ -14,9 +14,9 @@ import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 
 import org.appcelerator.titanium.TiBlob;
-import org.appcelerator.titanium.TiContext;
 import org.appcelerator.titanium.util.Log;
 import org.appcelerator.titanium.util.TiConfig;
+import org.appcelerator.titanium.TiApplication;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -32,8 +32,8 @@ public class JpglibModule extends KrollModule {
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant public static final String EXTERNAL_NAME = value;
 
-	public JpglibModule(TiContext tiContext) {
-		super(tiContext);
+	public JpglibModule() {
+		super();
 	}
 
 	@Kroll.method
@@ -51,7 +51,7 @@ public class JpglibModule extends KrollModule {
 				imageBytes.length, opts);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		resized.compress(CompressFormat.JPEG, quality, stream);
-		TiBlob blob = TiBlob.blobFromData(getTiContext(), stream.toByteArray(),
+		TiBlob blob = TiBlob.blobFromData(stream.toByteArray(),
 				"image/jpeg");
 
 		return blob;
